@@ -1,0 +1,7 @@
+#!/bin/bash
+declare repo_name=`pwd | xargs basename`
+echo "Start to create repository "$repo_name
+curl -u 'fuurin' https://api.github.com/user/repos -d '{"name":"'$repo_name'"}' -k
+if [`git remote add origin https://github.com/fuurin/$repo_name.git | grep 'fatal'` == ''] ; then
+    echo "created repository $1 on fuurin's github and added as the origin"
+fi
